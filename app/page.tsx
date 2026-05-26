@@ -293,7 +293,7 @@ export default function Home() {
             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
               <h3 className="text-blue-400 font-bold mb-3 text-sm uppercase tracking-wider">Real-World Hook</h3>
               <p className="text-white/80 leading-relaxed">
-                Roads stay ice-free after salting because dissolved salt lowers the freezing point of water — the same chemistry behind making ice cream by hand.
+                Roads stay ice-free after salting because dissolved salt lowers the freezing point of water.
               </p>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
@@ -331,15 +331,14 @@ export default function Home() {
             <h4 className="text-white/50 text-xs uppercase tracking-wider mb-3">Predicted Ranking</h4>
             <div className="space-y-2">
               {[
-                { rank: 1, name: 'CaCl₂·2H₂O', reason: 'i = 3 (most particles)', color: cacl2Color },
-                { rank: 2, name: 'NaCl', reason: 'i = 2 (moderate particles)', color: naclColor },
-                { rank: 3, name: 'Sucrose', reason: 'i = 1 (fewest particles)', color: sucroseColor },
+                { rank: 1, name: 'CaCl₂·2H₂O', color: cacl2Color },
+                { rank: 2, name: 'NaCl', color: naclColor },
+                { rank: 3, name: 'Sucrose', color: sucroseColor },
               ].map(r => (
                 <div key={r.rank} className="flex items-center gap-3 bg-white/5 rounded-lg px-3 py-2">
                   <span className="text-white/30 font-bold text-sm w-4">#{r.rank}</span>
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: r.color }} />
                   <span className="font-medium text-sm" style={{ color: r.color }}>{r.name}</span>
-                  <span className="text-white/40 text-xs ml-auto">{r.reason}</span>
                 </div>
               ))}
             </div>
@@ -428,7 +427,7 @@ export default function Home() {
             <div className="bg-gradient-to-br from-blue-950/50 to-indigo-950/50 border border-blue-500/20 rounded-xl p-6">
               <h3 className="text-2xl font-bold text-white mb-3">Key Principle</h3>
               <p className="text-white/80 leading-relaxed">
-                Colligative properties depend only on the <span className="text-blue-300 font-bold">NUMBER</span> of dissolved particles — not their chemical identity or size.
+                Colligative properties depend only on the <span className="text-blue-300 font-bold">NUMBER</span> of dissolved particles — not their identity.
               </p>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
@@ -468,24 +467,8 @@ export default function Home() {
                 </div>
                 <div className="flex gap-3">
                   <span className="text-blue-400 mt-0.5">▶</span>
-                  <span>Dissolving increases entropy (disorder), making it harder for water molecules to align into an ordered ice lattice.</span>
+                  <span>Entropy: dissolving increases disorder, making it harder for water to form ordered ice structure.</span>
                 </div>
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-              <h3 className="text-blue-400 font-bold mb-3 text-sm uppercase tracking-wider">Particle Count Comparison</h3>
-              <div className="space-y-2">
-                {[
-                  { name: 'Sucrose', i: 1, particles: '●', color: sucroseColor },
-                  { name: 'NaCl', i: 2, particles: '● ●', color: naclColor },
-                  { name: 'CaCl₂·2H₂O', i: 3, particles: '● ● ●', color: cacl2Color },
-                ].map(s => (
-                  <div key={s.name} className="flex items-center gap-3 text-sm">
-                    <span className="w-24 font-medium" style={{ color: s.color }}>{s.name}</span>
-                    <span className="text-white/40 text-xs">i = {s.i}</span>
-                    <span className="ml-auto tracking-widest" style={{ color: s.color }}>{s.particles}</span>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
@@ -510,7 +493,7 @@ export default function Home() {
             {[
               { sym: 'ΔTf', name: 'Freezing point depression', detail: 'Drop in freezing point (°C)', color: 'text-white' },
               { sym: 'i', name: "Van't Hoff factor", detail: 'Number of particles per formula unit', color: 'text-blue-400' },
-              { sym: 'Kf', name: 'Cryoscopic constant', detail: '1.86 °C·kg/mol for water', color: 'text-purple-400' },
+              { sym: 'Kf', name: '1.86 °C·kg/mol for water', detail: '', color: 'text-purple-400' },
               { sym: 'm', name: 'Molality', detail: 'mol solute / kg solvent', color: 'text-cyan-400' },
             ].map(v => (
               <div key={v.sym} className="flex gap-4 items-start bg-white/5 border border-white/10 rounded-xl p-4">
@@ -612,7 +595,7 @@ export default function Home() {
                 'Set up ice bath with ice and 75 g NaCl; confirmed temperature below −5 °C.',
                 'Inserted temperature probe into solution and lowered into ice bath.',
                 'Recorded the lowest temperature reached for each solution.',
-                'Repeated for all 13 solutions over two days (two trials each).',
+                'Repeated for all 13 solutions over two days.',
               ].map((step, i) => (
                 <li key={i} className="flex gap-3 text-sm text-white/80">
                   <span className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">{i + 1}</span>
@@ -749,7 +732,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="text-white/30 text-xs text-center mt-3">Y-axis shows |ΔTf| — magnitude of freezing point depression. Dashed lines = trendlines (y-intercept forced through origin).</p>
         </div>
       </SectionWrap>
 
@@ -764,7 +746,7 @@ export default function Home() {
             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
               <h3 className="text-white font-bold mb-3 text-sm uppercase tracking-wider">Overall Finding</h3>
               <p className="text-white/80 text-sm leading-relaxed">
-                <strong className="text-red-400">All experimental values were more negative than predicted</strong>, suggesting systematically higher actual molalities than intended — consistent with excess solute being added.
+                <strong className="text-red-400">All experimental values were more negative than predicted.</strong>
               </p>
             </div>
             {[
@@ -792,7 +774,7 @@ export default function Home() {
                 points: [
                   'Most consistent results, correct trend throughout',
                   'Percent errors: 54.7% (0.4 m) to 158.9% (0.1 m)',
-                  'Highest R² = 0.986 — best fit to linear model',
+                  'Most consistent results, R² = 0.986',
                 ],
               },
             ].map(s => (
@@ -826,10 +808,6 @@ export default function Home() {
                 <div className="flex gap-2">
                   <span className="text-blue-400 shrink-0">→</span>
                   <span>Possible incomplete dissolution for some higher-concentration solutions</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="text-blue-400 shrink-0">→</span>
-                  <span>Only two trials per solution — insufficient to detect and eliminate outliers</span>
                 </div>
               </div>
             </div>
@@ -878,24 +856,23 @@ export default function Home() {
             </div>
             <div className="rounded-xl p-5 border" style={{ borderColor: cacl2Color + '40', backgroundColor: cacl2Color + '08' }}>
               <h3 className="font-bold mb-2 text-sm uppercase tracking-wider" style={{ color: cacl2Color }}>Why CaCl₂·2H₂O Makes a Better Ice Cream Bath</h3>
-              <p className="text-white/80 text-sm">With i = 3, CaCl₂·2H₂O produces <strong className="text-white">50% more particles</strong> than NaCl (i = 2), creating a colder bath and freezing the cream faster.</p>
+              <p className="text-white/80 text-sm">CaCl₂·2H₂O makes a more effective ice cream bath than NaCl because i = 3 produces more particles and a colder bath.</p>
             </div>
           </div>
           <div className="space-y-4">
             <div className="rounded-xl p-5 border" style={{ borderColor: sucroseColor + '40', backgroundColor: sucroseColor + '08' }}>
               <h3 className="font-bold mb-2 text-sm uppercase tracking-wider" style={{ color: sucroseColor }}>Why Ice Cream Stays Scoopable</h3>
               <p className="text-white/80 text-sm leading-relaxed">
-                The sucrose dissolved in ice cream depresses <em>its own</em> freezing point to approximately −2 to −3 °C, keeping it soft enough to scoop even when fully frozen.
+                Ice cream stays scoopable because dissolved sucrose depresses its own freezing point to approximately −2 to −3 °C.
               </p>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
               <h3 className="text-blue-400 font-bold mb-3 text-sm uppercase tracking-wider">Real-World Applications</h3>
               <div className="space-y-2 text-sm text-white/80">
                 {[
-                  { icon: '🛣️', text: 'Road de-icing with NaCl and MgCl₂ in winter' },
-                  { icon: '🚗', text: 'Antifreeze (ethylene glycol) in car radiators' },
-                  { icon: '🏭', text: 'Food science — controlling texture in frozen products' },
-                  { icon: '🧪', text: 'Laboratory cryogenic baths for temperature control' },
+                  { icon: '🛣️', text: 'Road de-icing' },
+                  { icon: '🚗', text: 'Antifreeze in cars' },
+                  { icon: '🏭', text: 'Food science industry' },
                 ].map(a => (
                   <div key={a.text} className="flex gap-3">
                     <span className="shrink-0">{a.icon}</span>
@@ -906,7 +883,7 @@ export default function Home() {
             </div>
             <div className="bg-white/5 border border-blue-500/20 rounded-xl p-4">
               <p className="text-white/70 text-sm italic">
-                &ldquo;The experiment directly demonstrated the same chemistry that keeps roads safe in winter and ice cream soft in the freezer.&rdquo;
+                The experiment directly demonstrated these real world applications.
               </p>
             </div>
           </div>
@@ -942,21 +919,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-              <h3 className="text-blue-400 font-bold mb-3 text-sm uppercase tracking-wider">Key Findings</h3>
-              <div className="space-y-2 text-sm">
-                {[
-                  { name: 'CaCl₂·2H₂O', label: 'Most consistent', note: 'R² = 0.986', color: cacl2Color },
-                  { name: 'NaCl', label: 'Most variable', note: 'R² = 0.736, 0.4 m outlier', color: naclColor },
-                  { name: 'Sucrose', label: 'Correct trend', note: 'Largest relative errors', color: sucroseColor },
-                ].map(s => (
-                  <div key={s.name} className="flex items-center gap-3 rounded-lg p-2.5 border" style={{ borderColor: s.color + '30', backgroundColor: s.color + '08' }}>
-                    <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
-                    <span className="font-medium text-sm" style={{ color: s.color }}>{s.name}</span>
-                    <span className="text-white/60 text-xs">{s.label}</span>
-                    <span className="ml-auto text-white/40 text-xs font-mono">{s.note}</span>
-                  </div>
-                ))}
-              </div>
+              <p className="text-white/80 text-sm">CaCl₂·2H₂O had the most consistent results with R² = 0.986.</p>
             </div>
           </div>
           <div className="space-y-4">
@@ -964,10 +927,10 @@ export default function Home() {
               <h3 className="text-blue-400 font-bold mb-3 text-sm uppercase tracking-wider">Recommendations</h3>
               <ul className="space-y-2 text-sm text-white/80">
                 {[
-                  'Use a balance accurate to 0.001 g for more precise solute masses',
-                  'Monitor ice bath temperature before every trial to ensure consistent conditions',
-                  'Run three trials instead of two to identify and exclude outliers',
-                  'Ensure complete dissolution (visually and with additional stirring) before testing',
+                  'Use balance accurate to 0.001 g',
+                  'Monitor ice bath temperature before every trial',
+                  'Run three trials instead of two',
+                  'Ensure complete dissolution before testing',
                 ].map((r, i) => (
                   <li key={i} className="flex gap-2">
                     <span className="text-blue-400 shrink-0">→</span>
@@ -980,9 +943,9 @@ export default function Home() {
               <h3 className="text-blue-400 font-bold mb-3 text-sm uppercase tracking-wider">Further Research</h3>
               <ul className="space-y-2 text-sm text-white/80">
                 {[
-                  'Test MgCl₂ (i = 3) or KCl (i = 2) as additional electrolytes',
-                  'Test higher concentrations to identify linearity limits',
-                  'Compare salt effectiveness for hand-cranked ice cream making',
+                  'Test MgCl₂ or KCl',
+                  'Test higher concentrations',
+                  'Compare salt effectiveness for ice cream making',
                 ].map((r, i) => (
                   <li key={i} className="flex gap-2">
                     <span className="text-purple-400 shrink-0">◆</span>
