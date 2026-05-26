@@ -1,11 +1,25 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback, Suspense } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import ParticleBackground from './components/ParticleBackground'
 import FreezeGraph from './components/FreezeGraph'
-import ImageGallery from './components/ImageGallery'
+import ImageGallery, { type Photo } from './components/ImageGallery'
+
+const LAB_PHOTOS: Photo[] = [
+  { src: 'lab1.png',  caption: 'Labeling 13 test tubes before adding distilled water' },
+  { src: 'lab2.png',  caption: 'Measuring 100 g of distilled water into each test tube' },
+  { src: 'lab3.png',  caption: 'Weighing sucrose on the electronic balance (±0.01 g)' },
+  { src: 'lab4.png',  caption: 'Weighing NaCl for 0.4 m and 0.6 m solutions' },
+  { src: 'lab5.png',  caption: 'Weighing CaCl₂·2H₂O — highest mass required per tube' },
+  { src: 'lab6.png',  caption: 'Stirring each solution with a glass rod until fully dissolved' },
+  { src: 'lab7.png',  caption: 'Building the ice-salt bath: ice + 75 g NaCl in Styrofoam cup' },
+  { src: 'lab8.png',  caption: 'Confirming ice bath temperature below −5 °C before testing' },
+  { src: 'lab9.png',  caption: 'Lowering a test tube into the ice bath with temperature probe inserted' },
+  { src: 'lab10.png', caption: 'Data logger recording the lowest temperature reached by the solution' },
+  { src: 'lab11.png', caption: 'All 13 solutions lined up after testing — Day 2 complete' },
+]
 
 const SECTIONS = [
   { id: 'title', label: 'Title' },
@@ -610,7 +624,7 @@ export default function Home() {
         </div>
         <div className="mt-6">
           <h3 className="text-blue-400 font-bold mb-1 text-sm uppercase tracking-wider">Lab Photo Gallery</h3>
-          <ImageGallery />
+          <ImageGallery photos={LAB_PHOTOS} />
         </div>
       </SectionWrap>
 
