@@ -190,6 +190,67 @@ function CountUp({ target, inView }: { target: number; inView: boolean }) {
   return <span>{count}</span>
 }
 
+function EqCalc() {
+  const [i, setI]   = useState('')
+  const [kf, setKf] = useState('')
+  const [m, setM]   = useState('')
+
+  const iV  = parseFloat(i)  || 0
+  const kfV = parseFloat(kf) || 0
+  const mV  = parseFloat(m)  || 0
+  const result = +(iV * kfV * mV).toFixed(4)
+  const ready = iV > 0 && kfV > 0 && mV > 0
+
+  const inputCls = "w-full rounded-2xl border-2 border-gray-200 px-4 py-3 font-mono text-lg font-bold text-gray-800 focus:outline-none focus:border-[#ff6b6b] bg-white transition-colors text-center"
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          { label: 'i', sub: "Van't Hoff factor", color: '#4ecdc4', val: i, set: setI, placeholder: 'e.g. 2' },
+          { label: 'Kf', sub: '°C·kg/mol', color: '#45b7d1', val: kf, set: setKf, placeholder: 'e.g. 1.86' },
+          { label: 'm', sub: 'molality', color: '#ff6b6b', val: m, set: setM, placeholder: 'e.g. 0.4' },
+        ].map(f => (
+          <div key={f.label}>
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <span className="text-sm font-black font-mono" style={{ color: f.color }}>{f.label}</span>
+              <span className="text-xs text-gray-400 font-medium">{f.sub}</span>
+            </div>
+            <input
+              type="number"
+              min="0"
+              step="any"
+              placeholder={f.placeholder}
+              value={f.val}
+              onChange={e => f.set(e.target.value)}
+              className={inputCls}
+              style={{ borderColor: f.val ? f.color + '60' : undefined }}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="rounded-2xl bg-white border-2 border-gray-100 p-5 text-center">
+        {ready ? (
+          <>
+            <p className="font-mono text-gray-500 text-sm mb-2">
+              ΔTf = <span style={{ color: '#4ecdc4' }}>{iV}</span> × <span style={{ color: '#45b7d1' }}>{kfV}</span> × <span style={{ color: '#ff6b6b' }}>{mV}</span>
+            </p>
+            <p className="font-black font-mono text-4xl" style={{ color: '#ff6b6b' }}>
+              = {result} °C
+            </p>
+            <p className="text-gray-400 text-sm mt-2">
+              Freezing point drops from 0 °C to <strong className="text-gray-700">−{result} °C</strong>
+            </p>
+          </>
+        ) : (
+          <p className="text-gray-300 font-semibold text-sm">Fill in all three values to see ΔTf</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
@@ -198,9 +259,6 @@ export default function Home() {
   const dataRef = useRef<HTMLDivElement>(null)
   const [dataInView, setDataInView] = useState(false)
   const [calcOpen, setCalcOpen] = useState(false)
-  const [calcSolute, setCalcSolute] = useState<'sucrose' | 'nacl' | 'cacl2' | 'custom'>('nacl')
-  const [calcM, setCalcM] = useState('0.4')
-  const [calcCustomI, setCalcCustomI] = useState('2')
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -623,120 +681,34 @@ export default function Home() {
           </Card>
         </div>
 
-        {/* Calculator */}
-        {(() => {
-          const iMap = { sucrose: 1, nacl: 2, cacl2: 3, custom: 0 }
-          const calcI = calcSolute === 'custom' ? (parseFloat(calcCustomI) || 0) : iMap[calcSolute]
-          const mVal = parseFloat(calcM) || 0
-          const result = +(calcI * 1.86 * mVal).toFixed(4)
-          const soluteColor = calcSolute === 'sucrose' ? sucroseColor : calcSolute === 'nacl' ? naclColor : calcSolute === 'cacl2' ? cacl2Color : '#9ca3af'
-          return (
-            <div className="mt-6">
-              <button
-                type="button"
-                onClick={() => setCalcOpen(o => !o)}
-                className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white text-sm transition-all hover:scale-105 active:scale-95"
-                style={{ background: 'linear-gradient(135deg, #ff6b6b, #45b7d1)' }}
+        <div className="mt-6">
+          <button
+            type="button"
+            onClick={() => setCalcOpen(o => !o)}
+            className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white text-sm transition-all hover:scale-105 active:scale-95"
+            style={{ background: 'linear-gradient(135deg, #ff6b6b, #45b7d1)' }}
+          >
+            <span>Try the Equation</span>
+            <motion.span animate={{ rotate: calcOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>▼</motion.span>
+          </button>
+
+          <AnimatePresence>
+            {calcOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="overflow-hidden"
               >
-                <span>Try the Equation</span>
-                <motion.span animate={{ rotate: calcOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>▼</motion.span>
-              </button>
-
-              <AnimatePresence>
-                {calcOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.35, ease: 'easeInOut' }}
-                    className="overflow-hidden"
-                  >
-                    <div className="mt-4 rounded-3xl border-2 p-6 space-y-5" style={{ background: '#fff5f5', borderColor: '#ff6b6b20' }}>
-                      <p className="text-sm font-black uppercase tracking-wider text-gray-400">Plug in your values</p>
-
-                      {/* Solute picker */}
-                      <div>
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Solute (sets i)</p>
-                        <div className="flex flex-wrap gap-2">
-                          {([
-                            { key: 'sucrose', label: 'Sucrose', i: 1, color: sucroseColor },
-                            { key: 'nacl',    label: 'NaCl',    i: 2, color: naclColor },
-                            { key: 'cacl2',   label: 'CaCl₂·2H₂O', i: 3, color: cacl2Color },
-                            { key: 'custom',  label: 'Custom i',    i: null, color: '#9ca3af' },
-                          ] as const).map(s => (
-                            <button
-                              key={s.key}
-                              type="button"
-                              onClick={() => setCalcSolute(s.key)}
-                              className="px-4 py-2 rounded-full text-sm font-bold transition-all border-2"
-                              style={{
-                                borderColor: calcSolute === s.key ? s.color : s.color + '30',
-                                background: calcSolute === s.key ? s.color + '20' : 'white',
-                                color: calcSolute === s.key ? s.color : '#9ca3af',
-                              }}
-                            >
-                              {s.label}{s.i !== null ? ` (i=${s.i})` : ''}
-                            </button>
-                          ))}
-                        </div>
-                        {calcSolute === 'custom' && (
-                          <div className="mt-3 flex items-center gap-3">
-                            <label className="text-sm font-bold text-gray-500">i =</label>
-                            <input
-                              type="number"
-                              min="1"
-                              step="1"
-                              value={calcCustomI}
-                              onChange={e => setCalcCustomI(e.target.value)}
-                              className="w-24 rounded-xl border-2 border-gray-200 px-3 py-1.5 font-mono text-sm font-bold text-gray-800 focus:outline-none focus:border-[#ff6b6b]"
-                            />
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Molality input */}
-                      <div>
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Molality (m)</p>
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="number"
-                            min="0"
-                            step="0.1"
-                            value={calcM}
-                            onChange={e => setCalcM(e.target.value)}
-                            className="w-32 rounded-xl border-2 border-gray-200 px-3 py-1.5 font-mono text-sm font-bold text-gray-800 focus:outline-none focus:border-[#ff6b6b]"
-                          />
-                          <span className="text-gray-400 font-semibold text-sm">mol / kg</span>
-                        </div>
-                      </div>
-
-                      {/* Equation worked out */}
-                      <div className="rounded-2xl bg-white border border-gray-100 p-5">
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Calculation</p>
-                        <div className="flex flex-wrap items-center gap-2 font-mono text-lg font-black text-gray-800">
-                          <span style={{ color: '#ff6b6b' }}>ΔTf</span>
-                          <span className="text-gray-400">=</span>
-                          <span style={{ color: '#4ecdc4' }}>{calcI}</span>
-                          <span className="text-gray-400">×</span>
-                          <span style={{ color: '#45b7d1' }}>1.86</span>
-                          <span className="text-gray-400">×</span>
-                          <span style={{ color: soluteColor }}>{mVal}</span>
-                          <span className="text-gray-400">=</span>
-                          <span className="text-3xl" style={{ color: '#ff6b6b' }}>{result} °C</span>
-                        </div>
-                        {result > 0 && (
-                          <p className="mt-3 text-gray-500 text-sm">
-                            The freezing point drops by <strong className="text-gray-800">{result} °C</strong>, from 0 °C to <strong className="text-gray-800">−{result} °C</strong>.
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          )
-        })()}
+                <div className="mt-4 rounded-3xl border-2 p-6" style={{ background: '#fff5f5', borderColor: '#ff6b6b20' }}>
+                  <p className="text-xs font-black uppercase tracking-wider text-gray-400 mb-5">Enter your values</p>
+                  <EqCalc />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </SectionWrap>
 
       {/* ───── SLIDE 6: MATERIALS & PROCEDURE ───── */}
