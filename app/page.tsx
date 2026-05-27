@@ -458,7 +458,7 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <p className="mt-2">Concentrations: 0.1 m, 0.2 m, 0.4 m, 0.6 m</p>
+                <p className="mt-2">Concentrations were 0.1 m, 0.2 m, 0.4 m, and 0.6 m.</p>
               </div>
             </Card>
           </div>
@@ -974,9 +974,9 @@ export default function Home() {
               <CardHeader color="#4ecdc4">Percent Error Summary</CardHeader>
               <div className="space-y-2.5">
                 {[
-                  { name: 'Sucrose',              range: '114% – 426%', color: sucroseColor },
-                  { name: 'NaCl (excl. outlier)', range: '22% – 275%',  color: naclColor },
-                  { name: 'CaCl₂·2H₂O',          range: '55% – 159%',  color: cacl2Color },
+                  { name: 'Sucrose',              range: '114% to 426%', color: sucroseColor },
+                  { name: 'NaCl (excl. outlier)', range: '22% to 275%',  color: naclColor },
+                  { name: 'CaCl₂·2H₂O',          range: '55% to 159%',  color: cacl2Color },
                 ].map(s => (
                   <div key={s.name} className="flex items-center justify-between">
                     <span className="font-bold text-base" style={{ color: s.color }}>{s.name}</span>
@@ -986,6 +986,14 @@ export default function Home() {
               </div>
             </Card>
           </div>
+        </div>
+        <div className="mt-5">
+          <Card>
+            <CardHeader color="#4ecdc4">Ice Cream Application</CardHeader>
+            <p className="text-gray-700 text-base leading-relaxed">
+              The salt-ice bath worked because NaCl dissolved in the ice film, lowering the bath freezing point well below 0°C. The cream mixture itself contained dissolved sucrose, which depressed its own freezing point to approximately -2 to -3°C, keeping the ice cream scoopable rather than freezing solid. As ice crystals formed, the remaining sucrose became more concentrated, further depressing the freezing point of the unfrozen liquid.
+            </p>
+          </Card>
         </div>
       </SectionWrap>
 
@@ -1045,6 +1053,42 @@ export default function Home() {
             </Card>
           </div>
         </div>
+
+        {/* Taste Test Results */}
+        <div className="mt-5">
+          <Card>
+            <CardHeader color="#4ecdc4">Taste Test Results</CardHeader>
+            <div className="overflow-x-auto mb-4">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-100 bg-gray-50">
+                    <th className="py-2.5 px-3 text-left text-gray-500 font-semibold">Sugar Amount</th>
+                    <th className="py-2.5 px-3 text-center text-gray-500 font-semibold">Sweetness (1-100)</th>
+                    <th className="py-2.5 px-3 text-center text-gray-500 font-semibold">Texture (1-100)</th>
+                    <th className="py-2.5 px-3 text-center text-gray-500 font-semibold">Overall (1-100)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { amount: '1 tbsp',            sweet: 29, texture: 66, overall: 40, overallColor: 'text-red-500' },
+                    { amount: '2 tbsp',            sweet: 70, texture: 75, overall: 72, overallColor: 'text-amber-500' },
+                    { amount: '3 tbsp standard', sweet: 88, texture: 80, overall: 85, overallColor: 'text-emerald-600' },
+                  ].map((row, i) => (
+                    <tr key={i} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                      <td className="py-2.5 px-3 font-semibold text-gray-700">{row.amount}</td>
+                      <td className="py-2.5 px-3 text-center font-mono text-gray-700">{row.sweet}</td>
+                      <td className="py-2.5 px-3 text-center font-mono text-gray-700">{row.texture}</td>
+                      <td className={`py-2.5 px-3 text-center font-mono font-black text-base ${row.overallColor}`}>{row.overall}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-gray-600 text-base leading-relaxed">
+              Three batches were prepared with different amounts of sugar and scored by two tasters. Higher sugar concentration produced higher scores across all categories, with the standard 3 tbsp recipe scoring 85 overall. This confirms that sucrose concentration affects not only the freezing point of the cream through colligative properties, but also the sensory qualities of the final product.
+            </p>
+          </Card>
+        </div>
       </SectionWrap>
 
       {/* ───── SLIDE 11: CONCLUSIONS ───── */}
@@ -1061,6 +1105,7 @@ export default function Home() {
                   { icon: '✓', color: '#4ecdc4', text: 'CaCl₂·2H₂O produced the largest depression at every concentration.' },
                   { icon: '✓', color: '#4ecdc4', text: 'Sucrose produced the smallest depression at every concentration.' },
                   { icon: '✗', color: '#ff6b6b', text: 'All experimental values were significantly larger than predicted due to experimental errors.' },
+                  { icon: '✓', color: '#4ecdc4', text: 'The taste test confirmed that higher sucrose concentration improved sweetness and texture, with the 3 tbsp batch scoring 85 out of 100 overall.' },
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-gray-700 text-base">
                     <span className="font-black shrink-0 text-lg" style={{ color: item.color }}>{item.icon}</span>
@@ -1097,6 +1142,7 @@ export default function Home() {
                   'Test MgCl₂ or KCl.',
                   'Test higher concentrations.',
                   'Compare salt effectiveness for ice cream making.',
+                  'Future research could test CaCl₂·2H₂O as the ice bath salt to compare freezing speed and ice cream texture against NaCl.',
                 ].map((r, i) => (
                   <li key={i} className="flex gap-2 text-gray-700 text-base">
                     <span className="font-black shrink-0" style={{ color: '#ff6b6b' }}>◆</span>
