@@ -98,7 +98,18 @@ export default function ImageGallery({ photos }: Props) {
         ))}
       </div>
 
-      {/* Lightbox */}
+      {/* X button — lives outside the animated backdrop so it always receives clicks */}
+      {selectedIndex !== null && (
+        <button
+          type="button"
+          onClick={() => setSelectedIndex(null)}
+          className="fixed top-4 right-4 z-[110] bg-white/15 hover:bg-white/30 rounded-full p-2.5 text-white transition-colors"
+        >
+          <X size={20} />
+        </button>
+      )}
+
+      {/* Lightbox backdrop + content */}
       <AnimatePresence>
         {current && selectedIndex !== null && (
           <motion.div
@@ -106,25 +117,17 @@ export default function ImageGallery({ photos }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
             onClick={() => setSelectedIndex(null)}
           >
-            {/* Close */}
-            <button
-              type="button"
-              onClick={e => { e.stopPropagation(); setSelectedIndex(null) }}
-              className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 rounded-full p-2.5 text-white transition-colors z-50"
-            >
-              <X size={20} />
-            </button>
-
             {/* Counter */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 text-white/50 text-xs font-mono z-10">
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 text-white/50 text-xs font-mono">
               {selectedIndex + 1} / {items.length}
             </div>
 
             {/* Prev */}
             <button
+              type="button"
               onClick={e => { e.stopPropagation(); prev() }}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-3 text-white transition-colors z-10"
             >
@@ -159,6 +162,7 @@ export default function ImageGallery({ photos }: Props) {
 
             {/* Next */}
             <button
+              type="button"
               onClick={e => { e.stopPropagation(); next() }}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-3 text-white transition-colors z-10"
             >

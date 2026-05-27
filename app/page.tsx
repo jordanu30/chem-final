@@ -17,7 +17,7 @@ const LAB_PHOTOS: Photo[] = [
   { src: 'lab8.png',  caption: 'Confirming ice bath temperature below −5 °C before testing' },
   { src: 'lab9.png',  caption: 'Lowering a test tube into the ice bath with temperature probe inserted' },
   { src: 'lab10.png', caption: 'Data logger recording the lowest temperature reached by the solution' },
-  { src: 'lab11.png', caption: 'All 13 solutions lined up after testing — Day 2 complete' },
+  { src: 'lab11.png', caption: 'All 13 solutions lined up after testing: Day 2 complete' },
 ]
 
 const SECTIONS = [
@@ -444,8 +444,7 @@ export default function Home() {
             <Card>
               <CardHeader color="#ff6b6b">Experimental Design</CardHeader>
               <div className="space-y-2 text-gray-700 text-base">
-                <p>Three solutes tested at four concentrations each</p>
-                <p>12 solutions plus 1 control (distilled water)</p>
+                <p>Three solutes tested at four concentrations each, plus one distilled water control.</p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   {[
                     { name: 'Sucrose', formula: 'C₁₂H₂₂O₁₁', color: sucroseColor },
@@ -513,10 +512,6 @@ export default function Home() {
                 ))}
               </div>
             </Card>
-            <Card>
-              <CardHeader color="#4ecdc4">Like Dissolves Like</CardHeader>
-              <p className="text-gray-700 text-base">Water is polar so it dissolves polar and ionic substances.</p>
-            </Card>
           </div>
           <div className="space-y-4">
             <Card>
@@ -560,7 +555,7 @@ export default function Home() {
             <div className="rounded-3xl p-6 border-2" style={{ background: 'linear-gradient(135deg, #4ecdc415, #45b7d115)', borderColor: '#45b7d130' }}>
               <h3 className="text-2xl font-black text-gray-900 mb-3">Key Principle</h3>
               <p className="text-gray-700 text-lg leading-relaxed">
-                Colligative properties depend only on the <span className="font-black" style={{ color: '#45b7d1' }}>NUMBER</span> of dissolved particles — not their identity.
+                Colligative properties depend only on the <span className="font-black" style={{ color: '#45b7d1' }}>NUMBER</span> of dissolved particles: not their identity.
               </p>
             </div>
             <Card>
@@ -591,8 +586,7 @@ export default function Home() {
             <div className="space-y-4">
               {[
                 'Dissolved particles get in the way of water molecules trying to form ice crystals.',
-                'More particles means more interference which means a lower freezing point.',
-                'Dissolving increases disorder and makes it harder for water to form ice.',
+                'More particles means more interference and a lower freezing point.',
               ].map((point, i) => (
                 <div key={i} className="flex gap-3">
                   <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0 mt-0.5" style={{ background: '#45b7d1' }}>{i + 1}</span>
@@ -631,10 +625,6 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <Card>
-              <p className="text-gray-500 text-sm mb-1 font-semibold">Why molality and not molarity?</p>
-              <p className="text-gray-700 text-base">Molality is used instead of molarity because mass does not change with temperature.</p>
-            </Card>
           </div>
           <Card>
             <CardHeader color="#ff6b6b">Van&apos;t Hoff Factors</CardHeader>
@@ -724,7 +714,7 @@ export default function Home() {
                   'Sucrose', 'NaCl', 'CaCl₂·2H₂O', 'Distilled water',
                   'Ice', 'Electronic balance (0.01 g)', 'Temperature probes', 'Data logger',
                   '13 test tubes', 'Graduated cylinder', 'Styrofoam cup', 'Glass stirring rods',
-                  'Weighing boats', 'Safety goggles', 'Gloves', 'Lab coat',
+                  'Safety goggles', 'Gloves',
                 ].map(m => (
                   <div key={m} className="flex items-center gap-2 text-gray-600 text-sm">
                     <span className="w-2 h-2 rounded-full shrink-0" style={{ background: '#4ecdc4' }} />
@@ -930,9 +920,9 @@ export default function Home() {
                 name: 'CaCl₂·2H₂O',
                 color: cacl2Color,
                 points: [
-                  'Most consistent results with the correct trend throughout.',
+                  'It showed the most consistent results with the correct trend throughout.',
                   'Percent error ranged from 54.7% at 0.4 m to 158.9% at 0.1 m.',
-                  'Most consistent results with R² = 0.986.',
+                  'It had the highest R² value at 0.986.',
                 ],
               },
             ].map(s => (
@@ -1007,8 +997,7 @@ export default function Home() {
               <CardHeader color="#45b7d1">How a Salt-Ice Bath Works</CardHeader>
               <ol className="space-y-2.5">
                 {[
-                  'NaCl dissolves in the thin film of water on the ice.',
-                  'The dissolved ions lower the freezing point of that water.',
+                  'NaCl dissolves in the thin film of water on the ice, and the ions lower its freezing point.',
                   'The ice melts and absorbs heat from the surroundings.',
                   'The bath drops below 0°C which is cold enough to freeze the cream.',
                 ].map((s, i) => (
@@ -1123,10 +1112,9 @@ export default function Home() {
               <CardHeader color="#45b7d1">Recommendations</CardHeader>
               <ul className="space-y-2.5">
                 {[
-                  'Use balance accurate to 0.001 g.',
+                  'Use a balance accurate to 0.001 g.',
                   'Monitor ice bath temperature before every trial.',
                   'Run three trials instead of two.',
-                  'Ensure complete dissolution before testing.',
                 ].map((r, i) => (
                   <li key={i} className="flex gap-2 text-gray-700 text-base">
                     <span className="font-black shrink-0" style={{ color: '#45b7d1' }}>→</span>
