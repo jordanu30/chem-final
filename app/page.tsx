@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
+import Image from 'next/image'
 import ParticleBackground from './components/ParticleBackground'
-import FreezeGraph from './components/FreezeGraph'
 import ImageGallery, { type Photo } from './components/ImageGallery'
 
 const LAB_PHOTOS: Photo[] = [
@@ -779,7 +779,16 @@ export default function Home() {
         <h2 className="text-5xl font-black mb-2 text-gray-900">Graph</h2>
         <p className="text-gray-500 text-lg font-semibold mb-6">Freezing Point Depression vs. Molality for Three Solutes</p>
         <Card>
-          <FreezeGraph />
+          <div className="relative w-full rounded-2xl overflow-hidden bg-white">
+            <Image
+              src="/images/lab5.png"
+              alt="Freezing Point Depression vs. Molality for Three Solutes"
+              width={591}
+              height={378}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
           <div className="mt-5 grid grid-cols-3 gap-3 text-center">
             {[
               { name: 'Sucrose',      slope: '3.6',  r2: '0.875', color: sucroseColor },
