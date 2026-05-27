@@ -21,10 +21,10 @@ export default function ParticleBackground() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const colors = ['#3b82f6', '#60a5fa', '#93c5fd', '#1d4ed8', '#2563eb']
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffe66d', '#a8e6cf', '#ffb3ba']
     const particles: Particle[] = []
-    const PARTICLE_COUNT = 60
-    const MAX_DIST = 140
+    const PARTICLE_COUNT = 55
+    const MAX_DIST = 130
 
     const resize = () => {
       canvas.width = canvas.offsetWidth
@@ -37,11 +37,11 @@ export default function ParticleBackground() {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2.5 + 1,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 3 + 1.5,
         color: colors[Math.floor(Math.random() * colors.length)],
-        opacity: Math.random() * 0.4 + 0.2,
+        opacity: Math.random() * 0.5 + 0.25,
       })
     }
 
@@ -73,9 +73,9 @@ export default function ParticleBackground() {
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x, q.y)
-            ctx.strokeStyle = '#3b82f6'
-            ctx.globalAlpha = (1 - dist / MAX_DIST) * 0.12
-            ctx.lineWidth = 0.8
+            ctx.strokeStyle = p.color
+            ctx.globalAlpha = (1 - dist / MAX_DIST) * 0.15
+            ctx.lineWidth = 0.7
             ctx.stroke()
           }
         }

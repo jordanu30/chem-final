@@ -61,17 +61,16 @@ interface TooltipPayload {
 interface CustomTooltipProps {
   active?: boolean
   payload?: TooltipPayload[]
-  label?: string
 }
 
 function CustomTooltip({ active, payload }: CustomTooltipProps) {
   if (!active || !payload || payload.length === 0) return null
   const entry = payload[0]
   return (
-    <div className="bg-[#0a0f1e] border border-white/20 rounded-lg px-3 py-2 text-sm shadow-xl">
-      <p style={{ color: entry.color }} className="font-semibold">{entry.name}</p>
-      <p className="text-white/80">Molality: <span className="text-white font-mono">{entry.value} m</span></p>
-      <p className="text-white/80">|ΔTf|: <span className="text-white font-mono">{payload[1]?.value?.toFixed(2)} °C</span></p>
+    <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 text-sm shadow-lg">
+      <p style={{ color: entry.color }} className="font-bold mb-1">{entry.name}</p>
+      <p className="text-gray-600">Molality: <span className="text-gray-900 font-mono font-semibold">{entry.value} m</span></p>
+      <p className="text-gray-600">|ΔTf|: <span className="text-gray-900 font-mono font-semibold">{payload[1]?.value?.toFixed(2)} °C</span></p>
     </div>
   )
 }
@@ -80,39 +79,39 @@ export default function FreezeGraph() {
   return (
     <div className="w-full h-[420px]">
       <ResponsiveContainer width="100%" height="100%">
-        <ComposedChart margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" />
+        <ComposedChart margin={{ top: 20, right: 30, bottom: 30, left: 20 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.07)" />
           <XAxis
             dataKey="m"
             type="number"
             domain={[0, 0.65]}
             tickCount={7}
-            label={{ value: 'Molality (m)', position: 'insideBottom', offset: -10, fill: 'rgba(255,255,255,0.6)', fontSize: 13 }}
-            tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 12 }}
-            stroke="rgba(255,255,255,0.2)"
+            label={{ value: 'Molality (m)', position: 'insideBottom', offset: -14, fill: '#6b7280', fontSize: 13 }}
+            tick={{ fill: '#6b7280', fontSize: 12 }}
+            stroke="rgba(0,0,0,0.15)"
           />
           <YAxis
             dataKey="tf"
             type="number"
             domain={[0, 7]}
-            label={{ value: '|ΔTf| (°C)', angle: -90, position: 'insideLeft', offset: 10, fill: 'rgba(255,255,255,0.6)', fontSize: 13 }}
-            tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 12 }}
-            stroke="rgba(255,255,255,0.2)"
+            label={{ value: '|ΔTf| (°C)', angle: -90, position: 'insideLeft', offset: 10, fill: '#6b7280', fontSize: 13 }}
+            tick={{ fill: '#6b7280', fontSize: 12 }}
+            stroke="rgba(0,0,0,0.15)"
           />
           <Tooltip content={<CustomTooltip />} />
           <Legend
-            wrapperStyle={{ color: 'rgba(255,255,255,0.8)', paddingTop: '16px' }}
-            formatter={(value) => <span style={{ color: 'rgba(255,255,255,0.8)' }}>{value}</span>}
+            wrapperStyle={{ paddingTop: '16px' }}
+            formatter={(value) => <span style={{ color: '#374151', fontSize: 13 }}>{value}</span>}
           />
-          <ReferenceLine y={0} stroke="rgba(255,255,255,0.1)" />
+          <ReferenceLine y={0} stroke="rgba(0,0,0,0.08)" />
 
           {/* Trendlines */}
           <Line
             data={sucroseTrend}
             dataKey="trend_s"
             dot={false}
-            stroke="#22c55e"
-            strokeWidth={1.5}
+            stroke="#4ecdc4"
+            strokeWidth={2}
             strokeDasharray="6 3"
             name="Sucrose trend"
             legendType="none"
@@ -121,8 +120,8 @@ export default function FreezeGraph() {
             data={naclTrend}
             dataKey="trend_n"
             dot={false}
-            stroke="#3b82f6"
-            strokeWidth={1.5}
+            stroke="#45b7d1"
+            strokeWidth={2}
             strokeDasharray="6 3"
             name="NaCl trend"
             legendType="none"
@@ -131,8 +130,8 @@ export default function FreezeGraph() {
             data={cacl2Trend}
             dataKey="trend_c"
             dot={false}
-            stroke="#f97316"
-            strokeWidth={1.5}
+            stroke="#ff6b6b"
+            strokeWidth={2}
             strokeDasharray="6 3"
             name="CaCl₂ trend"
             legendType="none"
@@ -142,20 +141,20 @@ export default function FreezeGraph() {
           <Scatter
             name="Sucrose (i=1, slope=3.6, R²=0.875)"
             data={sucroseData}
-            fill="#22c55e"
-            r={6}
+            fill="#4ecdc4"
+            r={7}
           />
           <Scatter
             name="NaCl (i=2, slope=8.65, R²=0.736)"
             data={naclData}
-            fill="#3b82f6"
-            r={6}
+            fill="#45b7d1"
+            r={7}
           />
           <Scatter
             name="CaCl₂·2H₂O (i=3, slope=8.61, R²=0.986)"
             data={cacl2Data}
-            fill="#f97316"
-            r={6}
+            fill="#ff6b6b"
+            r={7}
           />
         </ComposedChart>
       </ResponsiveContainer>

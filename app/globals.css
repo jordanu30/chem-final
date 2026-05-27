@@ -5,23 +5,32 @@ html {
 }
 
 body {
-  background: #0a0f1e;
-  color: #ffffff;
+  background: #fffef7;
+  color: #1a1a2e;
   overflow-x: hidden;
   font-family: var(--font-geist-sans, Arial, sans-serif);
 }
 
-.glow-text {
-  animation: glow-pulse 3s ease-in-out infinite;
+.gradient-title {
+  background: linear-gradient(135deg, #ff6b6b 0%, #45b7d1 50%, #4ecdc4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-shift 5s ease-in-out infinite;
+  background-size: 200% 200%;
 }
 
-@keyframes glow-pulse {
-  0%, 100% {
-    text-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 60px #3b82f6;
-  }
-  50% {
-    text-shadow: 0 0 40px #3b82f6, 0 0 80px #3b82f6, 0 0 120px #3b82f6;
-  }
+@keyframes title-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.ice-pattern {
+  background-image:
+    radial-gradient(circle, rgba(78, 205, 196, 0.12) 2px, transparent 2px),
+    radial-gradient(circle, rgba(255, 107, 107, 0.08) 2px, transparent 2px);
+  background-size: 44px 44px, 72px 72px;
+  background-position: 0 0, 22px 22px;
 }
 
 .hide-scrollbar {
