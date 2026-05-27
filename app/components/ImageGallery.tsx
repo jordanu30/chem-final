@@ -111,8 +111,9 @@ export default function ImageGallery({ photos }: Props) {
           >
             {/* Close */}
             <button
-              onClick={() => setSelectedIndex(null)}
-              className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 rounded-full p-2.5 text-white transition-colors z-10"
+              type="button"
+              onClick={e => { e.stopPropagation(); setSelectedIndex(null) }}
+              className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 rounded-full p-2.5 text-white transition-colors z-50"
             >
               <X size={20} />
             </button>
