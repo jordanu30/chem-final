@@ -12,7 +12,6 @@ const LAB_PHOTOS: Photo[] = [
   { src: 'lab2.png',  caption: 'Measuring 100 g of distilled water into each test tube' },
   { src: 'lab3.png',  caption: 'Weighing sucrose on the electronic balance (±0.01 g)' },
   { src: 'lab4.png',  caption: 'Weighing NaCl for 0.4 m and 0.6 m solutions' },
-  { src: 'lab5.png',  caption: 'Weighing CaCl₂·2H₂O — highest mass required per tube' },
   { src: 'lab6.png',  caption: 'Stirring each solution with a glass rod until fully dissolved' },
   { src: 'lab7.png',  caption: 'Building the ice-salt bath: ice + 75 g NaCl in Styrofoam cup' },
   { src: 'lab8.png',  caption: 'Confirming ice bath temperature below −5 °C before testing' },
